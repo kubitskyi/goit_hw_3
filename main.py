@@ -10,7 +10,7 @@ def get_next_week_start(d:datetime):
 
 def prepare_birthaday(text: str):
     try:
-        bd =  datetime.strptime(text, '%d-%m-%Y')
+        bd =  datetime.strptime(text, '%Y-%m-%d')
     except ValueError:
         if text == '29-02-2023':
             bd = datetime(2023,3,1)
@@ -20,9 +20,7 @@ def prepare_birthaday(text: str):
 def get_birthdays_per_week(users):
     birthdays = defaultdict(list)
 
-    # today = datetime.now().date()
-
-    today = datetime(2023,2,26).date()
+    today = datetime.now().date()
 
     next_week_start = get_next_week_start(today)
     start_period = next_week_start - timedelta(2)
@@ -41,4 +39,4 @@ def get_birthdays_per_week(users):
 
 
 if __name__=="__main__":
-    pprint(get_birthdays_per_week(get_user_birthdays))
+    pprint(get_birthdays_per_week(get_user_birthdays(100)))
